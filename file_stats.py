@@ -13,9 +13,7 @@ def char_counts(textfilename):
     result = [0 for i in range(256)]
 
     for char in ord_list:
-        for i in range(256):
-            if char == i:
-                result[i] += 1
+            result[char] += 1
 
     return result
 
