@@ -1,6 +1,11 @@
 # Task B
 
 
+import collections as col
+import math as m
+import numpy as np
+
+
 def letter_freq(txt):
     a = txt.lower()
     letter_count = {x: a.count(x) for x in set(a)}
@@ -8,14 +13,20 @@ def letter_freq(txt):
 
 
 def entropy(message):
-    n_i = letter_freq(message)
-    p_i = []
-    sum_i = sum(n_i)
+    n_i = list(letter_freq(message).values())
+
+    p_i = [0 for i in range(len(n_i))]
+    sum_i = 0
+
     for i in n_i:
-        p_i.append(i/sum_i)
+        sum_i += i
+
+    for i in range(len(n_i)):
+        p_i[i] = n_i[i]/sum_i
+
     S = 0
-    for i in range(len(p_i))
-        S += -(p_i(i)*log_2(p_i(i)))
+    for i in p_i:
+        S += -(i*m.log2(i))
     return S
 
 
