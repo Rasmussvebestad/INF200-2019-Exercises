@@ -3,14 +3,21 @@
 
 def char_counts(textfilename):
 
-    with open(textfilename, 'r', encoding='utf-8') as textfile
+    # Creating the string
+    with open(textfilename, 'r', encoding='utf-8') as textfile:
         char_string = textfile.read()
 
+    # Converting the string to
     ord_list = [ord(i) for i in char_string]
 
-    
+    result = [0 for i in range(256)]
 
+    for char in ord_list:
+        for i in range(256):
+            if char == i:
+                result[i] += 1
 
+    return result
 
 
 if __name__ == '__main__':
