@@ -1,8 +1,8 @@
 # Task C
 
 
-def bubble_sort(data):
-    new_list = list(data)
+def bubble_sort(data1):
+    new_list = list(data1)
     for i in range(len(new_list)-1):
         for j in range(len(new_list)-i-1):
             if new_list[j] > new_list[j+1]:
