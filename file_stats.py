@@ -13,7 +13,7 @@ def char_counts(textfilename):
     result = [0 for i in range(256)]
 
     for char in ord_list:
-            result[char] += 1
+        result[char] += 1
 
     return result
 
@@ -33,4 +33,3 @@ if __name__ == '__main__':
                     code, character, frequencies[code]
                 )
             )
-

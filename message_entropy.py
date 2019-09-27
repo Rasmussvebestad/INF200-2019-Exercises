@@ -3,7 +3,6 @@
 
 import collections as col
 import math as m
-import numpy as np
 
 
 def letter_freq(txt):
@@ -24,15 +23,12 @@ def entropy(message):
     for i in range(len(n_i)):
         p_i[i] = n_i[i]/sum_i
 
-    S = 0
+    s = 0
     for i in p_i:
-        S += -(i*m.log2(i))
-    return S
-
-
+        s += -(i*m.log2(i))
+    return s
 
 
 if __name__ == "__main__":
     for msg in '', 'aaaa', 'aaba', 'abcd', 'This is a short text.':
         print('{:25}: {:8.3f} bits'.format(msg, entropy(msg)))
-
