@@ -8,12 +8,11 @@ class LCGRand:
     def __init__(self, seed):
         self.a = 7 ** 5
         self.m = 2 ** 31 - 1
-        self.seed = seed
+        self.r = [seed]
 
     def rand(self):
-        r = [self.seed]
-        r.append(self.a * r[-1] % self.m)
-        return r[-1]
+        self.r.append(self.a * self.r[-1] % self.m)
+        return self.r[-1]
 
 
 class ListRand:
@@ -29,7 +28,7 @@ class ListRand:
 
 if __name__ == "__main__":
 
-    lcgrand = LCGRand(10)
+    lcgrand = LCGRand(1)
     listrand = ListRand([1, 14, 33, 13, 222, 1033, 2])
     for i in range(10):
         if i < 5:
