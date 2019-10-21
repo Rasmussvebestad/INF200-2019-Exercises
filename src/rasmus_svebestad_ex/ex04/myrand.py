@@ -11,8 +11,7 @@ class LCGRand:
         self.seed = seed
 
     def rand(self):
-        r = [None]
-        r[1] = self.seed
+        r = [self.seed]
         r.append(self.a * r[-1] % self.m)
         return r[-1]
 
@@ -28,8 +27,12 @@ class ListRand:
             return self.a_list.pop(0)
 
 
-for i in range(10):
-    if i < 5:
-        print(LCGRand.rand(3))
-    else:
-        print(ListRand.rand([1, 14, 33, 13, 222, 1033, 2]))
+if __name__ == "__main__":
+
+    lcgrand = LCGRand(10)
+    listrand = ListRand([1, 14, 33, 13, 222, 1033, 2])
+    for i in range(10):
+        if i < 5:
+            print(lcgrand.rand())
+        else:
+            print(listrand.rand())
