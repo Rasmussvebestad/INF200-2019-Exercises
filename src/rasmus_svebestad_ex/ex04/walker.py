@@ -30,8 +30,23 @@ class Walker:
 
     def walk_home(self):
         a = False
-        while a = False:
+        while not a:
             self.move()
-            self.is_at_home()
-        
-        return
+            a = self.is_at_home()
+        return self.get_steps()
+
+
+if __name__ == "__main__":
+
+    for i in ((0, 1),
+              (0, 2),
+              (0, 5),
+              (0, 10),
+              (0, 20),
+              (0, 50),
+              (0, 100)):
+        list1 = []
+        for j in range(5):
+            walking_home = Walker(i[0], i[1])
+            list1.append(walking_home.walk_home())
+        print('Distance : ' + str(i[1]) + ' -> Path lengths:' + str(list1))
