@@ -18,12 +18,18 @@ class LCGRand:
 
 
 class ListRand:
-    def __init__(self, alist):
-        self.alist = alist
+    def __init__(self, a_list):
+        self.a_list = a_list
 
     def rand(self):
-        if len(self.alist) <= 0:
+        if len(self.a_list) <= 0:
             raise RuntimeError
         else:
-            
+            return self.a_list.pop(0)
 
+
+for i in range(10):
+    if i < 5:
+        print(LCGRand.rand(3))
+    else:
+        print(ListRand.rand([1, 14, 33, 13, 222, 1033, 2]))
