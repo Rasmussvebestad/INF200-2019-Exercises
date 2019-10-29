@@ -18,12 +18,14 @@ class LCGRand:
 class ListRand:
     def __init__(self, a_list):
         self.a_list = a_list
+        self.index = 0
 
     def rand(self):
-        if len(self.a_list) <= 0:
+        if self.index == len(self.a_list):
             raise RuntimeError
         else:
-            return self.a_list.pop(0)
+            self.index += 1
+            return self.a_list[self.index - 1]
 
 
 if __name__ == "__main__":
