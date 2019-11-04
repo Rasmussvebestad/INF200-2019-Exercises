@@ -4,11 +4,11 @@ __author__ = 'Rasmus Svebestad'
 __email__ = 'rasmus.svebestad@nmbu.no'
 
 
-from .walker_sim import Walker, Simulation
+from walker_sim import Simulation
 import random
 
 
-class BoundedWalker(Walker):
+class BoundedWalker(Simulation):
     def __init__(self, start, home, left_limit, right_limit):
         self.position = start
         self.home = home
@@ -17,21 +17,24 @@ class BoundedWalker(Walker):
         self.steps = 0
 
     def bounded_move(self):
-        if self.position == self.left_limit:
-            self.position += 1
-        elif self.position == self.right_limit:
-            self.position -= 1
-        else:
-            Walker.move(self)
-        self.steps += 1
+        a = random.randint(0, 1)
+        if self.position != self.left_limit and self.position != self.right_limit:
+            self.position += a * 2 - 1
+            self.steps += 1
+        elif self.position == self.right_limit and a == 0:
+            self.position += a * 2 - 1
+            self.steps += 1
+        elif self.position == self.left_limit and a == 1:
+            self.position += a * 2 - 1
+            self.steps += 1
 
     def bounded_walk(self):
         while not BoundedWalker.is_at_home(self):
             self.bounded_move(self)
-        return Simulation.get_steps(self)
+        return BoundedWalker.get_steps(self)
 
 
-class BoundedSimulation(Walker, BoundedWalker):
+class BoundedSimulation(BoundedWalker):
     def __init__(self, start, home, seed, left_limit, right_limit):
         self.position = start
         self.home = home
@@ -43,7 +46,7 @@ class BoundedSimulation(Walker, BoundedWalker):
     def bounded_single_walk(self):
         random.seed(self.seed)
         while not BoundedSimulation.is_at_home(self):
-            BoundedWalker.move(self)
+            BoundedSimulation.bounded_move(self)
         return BoundedSimulation.get_steps(self)
 
     def bounded_simulation(self, num_walks):
