@@ -89,7 +89,7 @@ def logistic_gradient(coef, X, y):
         logistic regression model.
     """
     # Your code here
-    pass
+    gradient = pass
 
 
 class LogisticRegression(BaseEstimator, ClassifierMixin):
@@ -142,8 +142,11 @@ class LogisticRegression(BaseEstimator, ClassifierMixin):
         random_state : np.random.random_state or int or None (default=None)
             A numpy random state object or a seed for a numpy random state object.
         """
-        # Your code here
-        pass
+        # Your code
+        self.max_iter = max_iter
+        self.tol = tol
+        self.learning_rate = learning_rate
+        self.random_state = random_state
 
     def _has_converged(self, coef, X, y):
         r"""Whether the gradient descent algorithm has converged.
@@ -169,7 +172,9 @@ class LogisticRegression(BaseEstimator, ClassifierMixin):
             True if the convergence criteria above is met, False otherwise.
         """
         # Your code here
-        pass
+        gradient = logistic_gradient(coef, X, y)
+        k = np.linalg.norm(gradient)
+        return k < self.tol
 
     def _fit_gradient_descent(self, coef, X, y):
         r"""Fit the logisitc regression model to the data given initial weights
