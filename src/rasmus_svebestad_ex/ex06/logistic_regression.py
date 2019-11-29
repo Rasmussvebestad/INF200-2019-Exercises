@@ -27,10 +27,7 @@ def sigmoid(z):
         Transformed input.
     """
     # Your code here
-    sigmoidal_transformed_z = np.zeros(np.shape(z))
-    for ind, val in enumerate(z):
-        sigmoidal_transformed_z[ind] = 1 / (1 - np.e ^ (-val))
-    return sigmoidal_transformed_z
+    return 1 / (1 + np.exp(-z))
 
 
 def predict_proba(coef, X):
@@ -55,11 +52,11 @@ def predict_proba(coef, X):
         The predicted class probabilities.
     """
     # Your code here
-    p = np.zeros(np.shape(coef))
-    for i, _ in enumerate(coef):
-        for j, _ in enumerate(X[i, :]):
-            p[i] += sigmoid(coef(j) * X[i, j])
-    return p
+    p = np.zeros(np.shape(X[:, 0]))
+    for i, _ in enumerate(X[:, 0]):
+        for j, _ in enumerate(coef):
+            p[i] += coef[j] * X[i, j]
+    return sigmoid(p)
 
 
 def logistic_gradient(coef, X, y):
@@ -89,8 +86,12 @@ def logistic_gradient(coef, X, y):
         logistic regression model.
     """
     # Your code here
-    gradient = pass
-
+    y_hat = predict_proba(coef, X)
+    something = y - y_hat
+    gradient = np.zeros(np.shape(something))
+    for i in range(len(X[0, :])):
+        gradient[i] = something.dot(X[:, i])
+    return gradient
 
 class LogisticRegression(BaseEstimator, ClassifierMixin):
     """A logistic regression classifier that follows the scikit-learn API.
