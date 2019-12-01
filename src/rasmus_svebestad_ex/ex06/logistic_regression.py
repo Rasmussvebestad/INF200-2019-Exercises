@@ -35,11 +35,11 @@ def predict_proba(coef, X):
     Estimate which class each data point in X corresponds to. This is done
     according to the following formula.
     .. math::
-        \hat{y}_i = \sigma(\mathbf{x}_i^T \mathbf{w}),
-    where :math:`x_i` is the i-th row in :math:`X` and :math:`\sigma` is
+        hat{y}_i = sigma(mathbf{x}_i^T mathbf{w}),
+    where :math:`x_i` is the i-th row in :math:`X` and :math:`sigma` is
     the sigmoidal function. Alternatively, in matrix-vector form:
     .. math::
-        \hat{\mathbf{y}} = \sigma(X \mathbf{w}).
+        hat{mathbf{y}} = sigma(X mathbf{w}).
     Parameters
     ----------
     coef : np.ndarray(shape=(r,))
@@ -88,10 +88,11 @@ def logistic_gradient(coef, X, y):
     # Your code here
     y_hat = predict_proba(coef, X)
     something = y - y_hat
-    gradient = np.zeros(np.shape(something))
+    gradient = np.zeros(np.shape(coef))
     for i in range(len(X[0, :])):
         gradient[i] = something.dot(X[:, i])
     return gradient
+
 
 class LogisticRegression(BaseEstimator, ClassifierMixin):
     """A logistic regression classifier that follows the scikit-learn API.
@@ -206,7 +207,12 @@ class LogisticRegression(BaseEstimator, ClassifierMixin):
             The logistic regression weights
         """
         # Your code here
-        pass
+        for i in range(self.max_iter):
+            if self._has_converged(coef, X, y):
+                break
+            else:
+                coef = coef - self.learning_rate * logistic_gradient(coef, X, y)
+
 
     def fit(self, X, y):
         """Fit a logistic regression model to the data.
@@ -291,6 +297,8 @@ if __name__ == "__main__":
 
     # Fit a logistic regression model to the X and y vector
     # Fill in your code here.
+    lr_model = LogisticRegression(BaseEstimator, ClassifierMixin)
+    lr_model.fit(X, y)
     # Create a logistic regression object and fit it to the dataset
 
     # Print performance information
