@@ -212,7 +212,7 @@ class LogisticRegression(BaseEstimator, ClassifierMixin):
                 break
             else:
                 coef = coef - self.learning_rate * logistic_gradient(coef, X, y)
-
+        return coef
 
     def fit(self, X, y):
         """Fit a logistic regression model to the data.
@@ -294,12 +294,11 @@ if __name__ == "__main__":
     X = np.random.standard_normal((100, 5))
     coef = np.random.standard_normal(5)
     y = predict_proba(coef, X) > 0.5
-
     # Fit a logistic regression model to the X and y vector
     # Fill in your code here.
-    lr_model = LogisticRegression(BaseEstimator, ClassifierMixin)
-    lr_model.fit(X, y)
     # Create a logistic regression object and fit it to the dataset
+    lr_model = LogisticRegression()
+    lr_model.fit(X, y)
 
     # Print performance information
     print(f"Accuracy: {lr_model.score(X, y)}")
