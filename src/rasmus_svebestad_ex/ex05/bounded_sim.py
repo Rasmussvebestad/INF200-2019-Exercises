@@ -4,10 +4,6 @@ __author__ = 'Rasmus Svebestad'
 __email__ = 'rasmus.svebestad@nmbu.no'
 
 
-from walker_sim import Simulation
-import random
-
-
 class BoundedWalker(Simulation):
     def __init__(self, start, home, left_limit, right_limit):
         self.position = start
